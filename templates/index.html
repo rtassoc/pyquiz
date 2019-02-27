@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1>My Quiz</h1>
+        <form method="POST" action="/">
+            {% for question_num in range(questions|length) %}
+                <strong>{{ questions[question_num] }}</strong><br>
+                <div class="form-group">
+                {% for choice_num in range(choices[question_num]|length) %}
+                    {% if choices[question_num][choice_num] != None %}
+                        <input type="radio" name="{{ groups[question_num] }}" value="{{ choices[question_num][choice_num] }}"> {{ choices[question_num][choice_num] }} </input><br>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            {% endfor %}
+        <input class="btn btn-primary" type="submit" value="submit">
+        </form>
+    </div>
+{% endblock %}

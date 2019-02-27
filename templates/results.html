@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}Quiz Results{% endblock %}
+
+{% block main %}
+<div class="container">
+    <h1>Quiz Results</h1>
+    {% for question_num in range(questions|length) %}
+        <strong>{{ questions[question_num] }}</strong><br>
+        {% for choice_num in range(choices[question_num]|length) %}
+            {% if choices[question_num][choice_num] != None %}
+                <!-- print the choice -->
+                {{ choices[question_num][choice_num] }}
+                <!-- if this choice was picked by the user -->
+                {% if choices[question_num][choice_num] == values[question_num] %}
+                    <!-- if this choice is the correct answer -->
+                    {% if choice_num == answers[question_num] %}
+                        <img src="{{ url_for('static', filename='correct.gif') }}"><br>
+                    {% else %}
+                        <img src="{{ url_for('static', filename='incorrect.gif') }}"><br>
+                    {% endif %}
+                {% else %}
+                    <br>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <br>
+    {% endfor %}
+
+    <h3>{{ message }}</h3>
+</div>
+{% endblock %}
